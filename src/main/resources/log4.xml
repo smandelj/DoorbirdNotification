@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="DOORBIRDLOGFILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/log/doorbird_notification.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="3000KB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{DATE} %-5p %-15c{1}: %m%n"/>
+        </layout>
+    </appender>
+
+
+    <appender name="HTTPAPPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/log/http_content.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="3000KB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{DATE} %-5p %-15c{1}: %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="SERVLETAPPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/log/servlet.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="3000KB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{DATE} %-5p %-15c{1}: %m%n"/>
+        </layout>
+    </appender>
+
+
+
+    <logger name="si.srecko.doorbird.notification">
+        <level value="DEBUG"/>
+        <appender-ref ref="DOORBIRDLOGFILE" />
+    </logger>
+
+    <logger name="si.srecko.doorbird.notification.servlet">
+        <level value="DEBUG"/>
+        <appender-ref ref="SERVLETAPPENDER" />
+    </logger>
+
+    <logger name="org.apache.http.wire">
+        <level value="DEBUG"/>
+        <appender-ref ref="HTTPAPPENDER" />
+    </logger>
+</log4j:configuration>

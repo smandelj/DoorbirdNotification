@@ -1,0 +1,67 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Doorbird notification app</display-name>
+
+    <listener>
+        <listener-class>si.srecko.doorbird.notification.servlet.TimerContextListener</listener-class>
+    </listener>
+
+
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>si.srecko.doorbird.notification.servlet.MainServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ZipatoServlet</servlet-name>
+        <servlet-class>si.srecko.doorbird.notification.servlet.ZipatoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NetatmoServlet</servlet-name>
+        <servlet-class>si.srecko.doorbird.notification.servlet.NetatmoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/mainServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ZipatoServlet</servlet-name>
+        <url-pattern>/zipatoServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>NetatmoServlet</servlet-name>
+        <url-pattern>/netatmoServlet</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>tomcat</role-name>
+        </auth-constraint>
+
+        <user-data-constraint>
+            <!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+
+
+</web-app>
