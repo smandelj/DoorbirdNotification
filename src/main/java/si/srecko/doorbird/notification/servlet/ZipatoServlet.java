@@ -76,6 +76,16 @@ public class ZipatoServlet extends HttpServlet{
             response="Done";
         }
 
+        if(event.startsWith(WakeOnLan.WAKE_ON_LAN)) {
+            String deviceName=event.substring(event.lastIndexOf('_')+1);
+            String deviceMac=pSing.getString("wake.on.lan."+deviceName);
+            if(deviceMac==null) response="Unknown device received:"+deviceName;
+            else {
+                WakeOnLan wakeOnLan = new WakeOnLan();
+                response=wakeOnLan.wakeOnLan(pSing.getString("wake.on.lan.mask"), deviceMac.toUpperCase());
+            }
+        }
+
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("speech",response);
         jsonObject.addProperty("displayText",response);
